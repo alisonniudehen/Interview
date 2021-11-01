@@ -25,12 +25,17 @@ namespace CanWeFixItService
         
         public async Task<IEnumerable<Instrument>> InstrumentsAsync()
         {
-            return await _connection.QueryAsync<Instrument>("SQL GOES HERE");
+            return await _connection.QueryAsync<Instrument>("SELECT * FROM Instrument WHERE Active=1");
         }
 
         public async Task<IEnumerable<MarketData>> MarketData()
         {
             return await _connection.QueryAsync<MarketData>("SELECT Id, DataValue FROM MarketData WHERE Active = 0");
+
+            //return await _connection.QueryAsync<MarketData>("SELECT M.Id, M.DataValue,I.Id as InstrumentId " +
+            //    " FROM MarketData M" +
+            //    " JOIN Instrument I ON I.Sedol =M.Sedol" +
+            //    " WHERE M.Active = 1");
         }
 
         /// <summary>
@@ -78,10 +83,6 @@ namespace CanWeFixItService
 
             _connection.Execute(createMarketData);
         }
-
-        Task<IEnumerable<Instrument>> IDatabaseService.Instruments()
-        {
-            throw new System.NotImplementedException();
-        }
+         
     }
 }
