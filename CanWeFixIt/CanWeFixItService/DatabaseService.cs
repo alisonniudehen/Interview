@@ -23,9 +23,9 @@ namespace CanWeFixItService
             _connection.Open();
         }
         
-        public IEnumerable<Instrument> Instruments()
+        public async Task<IEnumerable<Instrument>> InstrumentsAsync()
         {
-            return _connection.QueryAsync<Instrument>("SQL GOES HERE");
+            return await _connection.QueryAsync<Instrument>("SQL GOES HERE");
         }
 
         public async Task<IEnumerable<MarketData>> MarketData()
@@ -77,6 +77,11 @@ namespace CanWeFixItService
                        (6, 6666, 'Sedol6', 1)";
 
             _connection.Execute(createMarketData);
+        }
+
+        Task<IEnumerable<Instrument>> IDatabaseService.Instruments()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
