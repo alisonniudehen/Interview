@@ -68,5 +68,39 @@ namespace CanWeFixItTest
             // Assert
             Assert.AreEqual(sumOfActive, Valuations.FirstOrDefault().Total);
         }
+        [Test]
+        public async Task DatabaseService_MarketDataAsync_CheckData()
+        {
+            // Arrange in Setup            
+            // Act
+            var data = (await _service.MarketDataAsync()).ToList();
+
+            // Assert
+            Assert.IsTrue(data.Count() == 2);
+            Assert.IsTrue(data.All(x => x.Active));
+            Assert.IsTrue(data.All(x => x.Id is 2 or 4) && data.All(x => x.InstrumentId is 2 or 4));
+        }
+        [Test]
+        public async Task DatabaseService_InstrumentsAsync_CheckData()
+        {
+            // Arrange in Setup            
+            // Act
+            var Valuations = (await _service.InstrumentsAsync()).ToList();
+
+            // Assert
+            Assert.IsTrue(Valuations.Count() == 4);
+            Assert.IsTrue(Valuations.All(x=>x.Active) && Valuations.All(x=>x.Id is 2 or 4 or 6 or 8));
+        }
+        [Test]
+        public async Task DatabaseService_ValuationsAsync_CheckData()
+        {
+            // Arrange in Setup            
+            // Act
+            var Valuations = (await _service.ValuationsAsync()).ToList();
+
+            // Assert
+            Assert.IsTrue(Valuations.Count() == 1);
+            Assert.IsTrue(Valuations.First().Name == "DataValueTotal" && Valuations.First().Total == 13332);
+        }
     }
 }
