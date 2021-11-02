@@ -30,17 +30,23 @@ namespace CanWeFixItService
 
         public async Task<IEnumerable<MarketData>> MarketDataAsync()
         {  
-            return await _connection.QueryAsync<MarketData>("SELECT M.Id, M.DataValue,  M.Active, I.Id as InstrumentId " +
+            return await _connection.QueryAsync<MarketData>("SELECT M.Id, M.DataValue, M.Sedol, M.Active, I.Id as InstrumentId " +
                 " FROM MarketData M" +
                 " JOIN Instrument I ON I.Sedol =M.Sedol" +
-                " WHERE M.Active = 1");
+                " WHERE M.Active = 1 AND IFNULL(M.Sedol,'')!=''");
         }
 
-        public async Task<IEnumerable<MarketValuation>> MarketValuationsAsync()
+        public async Task<IEnumerable<MarketValuation>> ValuationsAsync()
         {
             return await _connection.QueryAsync<MarketValuation>("SELECT \"DataValueTotal\" as Name, SUM(DataValue) as Total " +
                " FROM MarketData" +              
-               " WHERE Active = 1");
+               " WHERE Active = true");
+        }
+
+        public async Task<IEnumerable<MarketData>> AllMarketDataAsync()
+        {
+            return await _connection.QueryAsync<MarketData>("SELECT * " +
+                " FROM MarketData");               
         }
         /// <summary>
         /// This is complete and will correctly load the test data.

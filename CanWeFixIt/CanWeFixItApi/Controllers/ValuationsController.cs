@@ -7,12 +7,12 @@ using System.Linq;
 namespace CanWeFixItApi.Controllers
 {
     [ApiController]
-    [Route("v1/MarketValuation")]
-    public class MarketValuationController : ControllerBase
+    [Route("v1/valuations")]
+    public class ValuationsController : ControllerBase
     {
         private readonly IDatabaseService _database;
         
-        public MarketValuationController(IDatabaseService database)
+        public ValuationsController(IDatabaseService database)
         {
             _database = database;
         }
@@ -20,8 +20,8 @@ namespace CanWeFixItApi.Controllers
         // GET
         public async Task<ActionResult<IEnumerable<MarketValuation>>> Get()
         {
-            var a = (await _database.MarketValuationsAsync()).ToList();
-            return Ok(await _database.MarketValuationsAsync());
+            var a = (await _database.ValuationsAsync()).ToList();
+            return Ok(await _database.ValuationsAsync());
         }
     }
 }

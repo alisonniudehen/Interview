@@ -6,13 +6,14 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Net.Http;
 
 namespace CanWeFixItTest
 {
     public class ControllerTest
     {
         private readonly WebApplicationFactory<Startup> _factory;
-
+        private HttpClient _client;
         public ControllerTest()
         {
             _factory = new WebApplicationFactory<Startup>();
@@ -21,16 +22,16 @@ namespace CanWeFixItTest
         [SetUp]
         public void Setup()
         {
-           
+            _client = _factory.CreateClient();
         }
 
         [Test]
-        public async Task MarketValuationController_GetAsync()
+        public async Task ValuationsController_GetAsync()
         {
             // Arrange
-            var client = _factory.CreateClient();
+           
             // Act
-            var response = await client.GetAsync("v1/MarketValuation");
+            var response = await _client.GetAsync("v1/valuations");
             response.EnsureSuccessStatusCode(); // Status Code 200-299
             var responseString = await response.Content.ReadAsStringAsync();
             var responseObject = JsonConvert.DeserializeObject<IEnumerable<MarketValuation>>(responseString);
@@ -42,9 +43,9 @@ namespace CanWeFixItTest
         public async Task MarketDataController_GetAsync()
         {
             // Arrange
-            var client = _factory.CreateClient();
+           
             // Act
-            var response = await client.GetAsync("v1/MarketData");
+            var response = await _client.GetAsync("v1/MarketData");
             response.EnsureSuccessStatusCode(); // Status Code 200-299
             var responseString = await response.Content.ReadAsStringAsync();
             var responseObject = JsonConvert.DeserializeObject<IEnumerable<MarketData>>(responseString);
@@ -56,9 +57,9 @@ namespace CanWeFixItTest
         public async Task InstrumentController_GetAsync()
         {
             // Arrange
-            var client = _factory.CreateClient();
+            
             // Act
-            var response = await client.GetAsync("v1/instruments");
+            var response = await _client.GetAsync("v1/instruments");
             response.EnsureSuccessStatusCode(); // Status Code 200-299
             var responseString = await response.Content.ReadAsStringAsync();
             var responseObject = JsonConvert.DeserializeObject<IEnumerable<Instrument>>(responseString);
