@@ -12,7 +12,7 @@
     "CanWeFixItApi": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "v1/instruments",
+      "launchUrl": "v2/marketdata",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

@@ -1,3 +1,6 @@
+ 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CanWeFixItService
 {
     public class MarketData
@@ -6,7 +9,7 @@ namespace CanWeFixItService
         public long? DataValue { get; set; }
         public string Sedol { get; set; }
         public bool Active { get; set; }
-        
+        [NotMapped]
         public int? InstrumentId { get; set; }
     }
 
@@ -16,5 +19,6 @@ namespace CanWeFixItService
         public long? DataValue { get; set; }
         public int? InstrumentId { get; set; }
         public bool Active { get; set; }
+        
     }
 }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using CanWeFixItService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace CanWeFixItApi
 {
@@ -26,11 +28,17 @@ namespace CanWeFixItApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CanWeFixItApi", Version = "v1" });
             });
             services.AddSingleton<IDatabaseService, DatabaseService>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+             
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -41,7 +49,7 @@ namespace CanWeFixItApi
             // Populate in-memory database with data
             var database = app.ApplicationServices.GetService(typeof(IDatabaseService)) as IDatabaseService;
             database?.SetupDatabase();
-            
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();

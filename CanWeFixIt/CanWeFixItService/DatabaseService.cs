@@ -29,13 +29,11 @@ namespace CanWeFixItService
         }
 
         public async Task<IEnumerable<MarketData>> MarketData()
-        {
-            return await _connection.QueryAsync<MarketData>("SELECT Id, DataValue FROM MarketData WHERE Active = 0");
-
-            //return await _connection.QueryAsync<MarketData>("SELECT M.Id, M.DataValue,I.Id as InstrumentId " +
-            //    " FROM MarketData M" +
-            //    " JOIN Instrument I ON I.Sedol =M.Sedol" +
-            //    " WHERE M.Active = 1");
+        {  
+            return await _connection.QueryAsync<MarketData>("SELECT M.Id, M.DataValue,  M.Active, I.Id as InstrumentId " +
+                " FROM MarketData M" +
+                " JOIN Instrument I ON I.Sedol =M.Sedol" +
+                " WHERE M.Active = 1");
         }
 
         /// <summary>
