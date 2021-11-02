@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CanWeFixItApi.Controllers
 {
     [ApiController]
-    [Route("v2/marketdata")]
+    [Route("v1/marketdata")]
     public class MarketDataController : ControllerBase
     {
         private readonly IDatabaseService _database;
