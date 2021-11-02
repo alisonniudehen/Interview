@@ -15,8 +15,11 @@ namespace CanWeFixItApi.Controllers
         {
             _database = database;
         }
-        
-        // GET
+        /// <summary>
+        /// A list of Instruments from the database that are currently active
+        /// </summary>
+        /// <returns></returns>        
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Instrument>>> Get()
         {
             return Ok(await _database.InstrumentsAsync());

@@ -16,11 +16,15 @@ namespace CanWeFixItApi.Controllers
         {
             _database = database;
         }
-        
-        // GET
+
+        /// <summary>
+        ///  A list of MarketValuation with a single item in the list. 
+        ///  This item should have a name of "DataValueTotal" and a total of the sum of all currently active MarketData
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<MarketValuation>>> Get()
-        {
-            var a = (await _database.ValuationsAsync()).ToList();
+        {            
             return Ok(await _database.ValuationsAsync());
         }
     }
