@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Data.Sqlite;
+using System.Linq;
 
 namespace CanWeFixItService
 {
@@ -48,12 +49,22 @@ namespace CanWeFixItService
             return await _connection.QueryAsync<MarketData>("SELECT * " +
                 " FROM MarketData");               
         }
+        private bool TableExist()
+        {
+            var table = _connection.QueryAsync<string>("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'instrument'").Result ;
+            return table.Count() > 0;
+        } 
+
         /// <summary>
         /// This is complete and will correctly load the test data.
         /// It is called during app startup 
         /// </summary>
         public void SetupDatabase()
         {
+            if (TableExist())
+            {
+                return;
+            }
             const string createInstruments = @"
                 CREATE TABLE instrument
                 (
