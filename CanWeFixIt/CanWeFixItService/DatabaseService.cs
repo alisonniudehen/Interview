@@ -28,7 +28,7 @@ namespace CanWeFixItService
             return await _connection.QueryAsync<Instrument>("SELECT * FROM Instrument WHERE Active=1");
         }
 
-        public async Task<IEnumerable<MarketData>> MarketData()
+        public async Task<IEnumerable<MarketData>> MarketDataAsync()
         {  
             return await _connection.QueryAsync<MarketData>("SELECT M.Id, M.DataValue,  M.Active, I.Id as InstrumentId " +
                 " FROM MarketData M" +
@@ -36,6 +36,12 @@ namespace CanWeFixItService
                 " WHERE M.Active = 1");
         }
 
+        public async Task<IEnumerable<MarketValuation>> MarketValuationsAsync()
+        {
+            return await _connection.QueryAsync<MarketValuation>("SELECT \"DataValueTotal\" as Name, SUM(DataValue) as Total " +
+               " FROM MarketData" +              
+               " WHERE Active = 1");
+        }
         /// <summary>
         /// This is complete and will correctly load the test data.
         /// It is called during app startup 
@@ -81,6 +87,8 @@ namespace CanWeFixItService
 
             _connection.Execute(createMarketData);
         }
-         
+
+    
+       
     }
 }

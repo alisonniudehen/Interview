@@ -22,7 +22,7 @@ namespace CanWeFixItApi.Controllers
         // GET
         public async Task<ActionResult<IEnumerable<MarketDataDto>>> Get()
         {
-            var marketDatas = (await _database.MarketData());
+            var marketDatas = (await _database.MarketDataAsync());
 
             var marketDataDtos = _mapper.Map<MarketDataDto[]>(marketDatas);
             return Ok(marketDataDtos);
