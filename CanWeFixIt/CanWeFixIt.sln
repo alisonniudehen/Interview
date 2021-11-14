@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CanWeFixItApi", "CanWeFixIt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CanWeFixItService", "CanWeFixItService\CanWeFixItService.csproj", "{BB862D26-613C-4D09-A150-92F1D82AA77F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanWeFixItTest", "CanWeFixItTest\CanWeFixItTest.csproj", "{03C91CA5-D596-48B5-B576-DF04C84AF2AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CanWeFixItTest", "CanWeFixItTest\CanWeFixItTest.csproj", "{03C91CA5-D596-48B5-B576-DF04C84AF2AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSTryTests", "VSTryTests\VSTryTests.csproj", "{728ED2B4-3296-45E2-A7CA-8C473154A06E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{03C91CA5-D596-48B5-B576-DF04C84AF2AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03C91CA5-D596-48B5-B576-DF04C84AF2AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03C91CA5-D596-48B5-B576-DF04C84AF2AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{728ED2B4-3296-45E2-A7CA-8C473154A06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{728ED2B4-3296-45E2-A7CA-8C473154A06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728ED2B4-3296-45E2-A7CA-8C473154A06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{728ED2B4-3296-45E2-A7CA-8C473154A06E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
